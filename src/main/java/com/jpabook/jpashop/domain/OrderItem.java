@@ -28,8 +28,32 @@ public class OrderItem {
 
     private int count;
 
+    //기본 생성자 접근 제어를 protected 적용
+    // -> 생성자를 통한 값 생성을 제어 ,
+    protected OrderItem(){
+
+    }
+
+    //생성 메서드
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
 
 
+    //비즈니스 로직
+    public void cancel() {
+        getItem().addStock(count);
 
+    }
 
+    //조회 로직 [전체 주문 가격 조회]
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
 }
