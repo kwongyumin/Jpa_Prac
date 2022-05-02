@@ -23,6 +23,8 @@ public class Order {
     private Member member;
 
 
+
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
